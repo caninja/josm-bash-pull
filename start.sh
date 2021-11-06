@@ -34,7 +34,7 @@ fi
 }
 
 if [ "nc -dzw1 google.com 443" ]
-then#gotnet
+then #gotnet
   if [ "$input" == "latest" ]
     then
     check_latest_get_latest
@@ -44,7 +44,7 @@ then#gotnet
     java -jar -Xmx6G josm-tested-${tested}.jar
   fi
 
-else#notgotnet
+else #notgotnet
   if [ "$input" == "latest" ]
     then
     java -jar -Xmx6G josm-latest-*.jar
