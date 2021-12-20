@@ -47,9 +47,9 @@ then #gotnet
 else #notgotnet
   if [ "$input" == "latest" ]
     then
-    java -jar -Xmx6G josm-latest-*.jar
+    GDK_SCALE=2 java -jar -Xmx12G josm-latest-*.jar
     else
-    java -jar -Xmx6G josm-tested-*.jar
+    GDK_SCALE=2 java -jar -Xmx12G josm-tested-*.jar
   fi
 fi
 
