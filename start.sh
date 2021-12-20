@@ -10,7 +10,7 @@ offline_tested=$(\ls . | grep josm-tested-*.jar | sed 's/[^0-9]*//g')
 
 function check_tested_get_tested () {
 if [ -f josm-tested-*.jar ]; then
-  if [ "$tested" !== "$offline_tested" ]; then
+  if ! [ "$tested" == "$offline_tested" ]; then
     curl -s "https://josm.openstreetmap.de/josm-tested.jar?lang=en" -o josm-tested-${tested}.jar
     chmod +x josm-tested-${tested}.jar
   fi
