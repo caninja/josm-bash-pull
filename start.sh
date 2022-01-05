@@ -12,7 +12,7 @@ S=1
 
 function check_resolution () {
 if [ "$Y" -ge "1440" ]; then
-S=2
+  S=1.5
 fi
 }
 
