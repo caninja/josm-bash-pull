@@ -1,13 +1,15 @@
-#!/bin/bash 
+#!/usr/bin/env bash
+set -e
 
 #TODO versioning or replace
+# If -f file to while do instead
 
 input="$1"
 latest=$(curl -sw '\n' "https://josm.openstreetmap.de/latest")
 tested=$(curl -sw '\n' "https://josm.openstreetmap.de/tested")
 offline_latest=$(\ls . | grep josm-latest-*.jar | sed 's/[^0-9]*//g')
 offline_tested=$(\ls . | grep josm-tested-*.jar | sed 's/[^0-9]*//g')
-Y=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)
+Y=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2 | head -n 1)
 S=1
 
 function check_resolution () {
@@ -32,7 +34,6 @@ function check_latest_get_latest () {
 if [ -f josm-latest-*.jar ]; then
   if ! [ "$latest" == "$offline_latest" ]; then
     curl -s "https://josm.openstreetmap.de/josm-latest.jar?lang=en" -o josm-latest-${latest}.jar
-    #mv josm-tested.jar josm-latest-${latest}.jar
     chmod +x josm-latest-${latest}.jar
   fi
 else
@@ -54,7 +55,7 @@ then #gotnet
     GDK_SCALE=$S java -jar -Xmx12G josm-tested-${tested}.jar
   fi
 
-else #notgotnet
+else
   if [ "$input" == "latest" ]
     then
      GDK_SCALE=$S java -jar -Xmx12G josm-latest-*.jar
